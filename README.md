@@ -34,7 +34,7 @@ Recommended setup:
 
 ```powershell
 corepack enable
-corepack prepare pnpm@latest --activate
+corepack prepare pnpm@11.1.3 --activate
 corepack pnpm install
 corepack pnpm typecheck
 corepack pnpm lint
