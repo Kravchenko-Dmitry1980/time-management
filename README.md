@@ -4,9 +4,27 @@ Contract-first MVP for a self-hosted personal/family/work task management system
 
 ## Current stage
 
-STAGE 0.3 — Tooling baseline
+STAGE 0.4 — CI no-secrets smoke
 
 Application business logic is not implemented yet.
+
+## CI
+
+Stage 0.4 adds a no-secrets smoke workflow.
+
+The CI checks:
+
+- install
+- lint
+- typecheck
+- test
+- format
+- secret-pattern scan
+- forbidden scope scan
+
+The default CI must not require real AI/STT provider keys, databases, Docker, or external services.
+
+The secret scan reports only filenames, not matching lines, to avoid printing secret-like values in CI logs.
 
 ## Developer tooling
 
