@@ -4,9 +4,33 @@ Contract-first MVP for a self-hosted personal/family/work task management system
 
 ## Current stage
 
-STAGE 0.2 — Monorepo skeleton
+STAGE 0.3 — Tooling baseline
 
 Application business logic is not implemented yet.
+
+## Developer tooling
+
+This repository uses pnpm via Corepack.
+
+Recommended setup:
+
+```powershell
+corepack enable
+corepack prepare pnpm@latest --activate
+corepack pnpm install
+corepack pnpm typecheck
+corepack pnpm lint
+corepack pnpm test
+```
+
+If `pnpm` is available directly in your shell, the `corepack` prefix can be omitted.
+
+Current commands:
+
+- `corepack pnpm typecheck`
+- `corepack pnpm lint`
+- `corepack pnpm test`
+- `corepack pnpm format`
 
 ## Documentation
 
