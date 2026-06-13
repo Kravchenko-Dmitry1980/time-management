@@ -4,9 +4,9 @@ Contract-first MVP for a self-hosted personal/family/work task management system
 
 ## Current stage
 
-STAGE 0.1 — Git baseline and contract documentation.
+STAGE 0.2 — Monorepo skeleton
 
-No application code has been implemented yet.
+Application business logic is not implemented yet.
 
 ## Documentation
 
@@ -21,6 +21,8 @@ Core contract documents are stored in `docs/`:
 - `TESTING_STRATEGY.md`
 - `WORKER_REMINDER_POLICY.md`
 - `IMPLEMENTATION_PLAN.md`
+- `CURSOR_SYSTEM_PROMPT.md`
+- `CODEX_REVIEW_PROMPT.md`
 
 ## Implementation rule
 
