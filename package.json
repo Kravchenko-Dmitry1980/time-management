@@ -14,7 +14,8 @@
     "clean": "git clean -fdX",
     "db:generate": "pnpm --filter @time-management/db db:generate",
     "db:check": "pnpm --filter @time-management/db db:check",
-    "db:migrate": "pnpm --filter @time-management/db db:migrate"
+    "db:migrate": "pnpm --filter @time-management/db db:migrate",
+    "db:seed": "pnpm --filter @time-management/db db:seed"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

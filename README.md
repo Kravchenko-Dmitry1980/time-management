@@ -4,7 +4,7 @@ Contract-first MVP for a self-hosted personal/family/work task management system
 
 ## Current stage
 
-STAGE 0.4 — CI no-secrets smoke
+STAGE 1.2 — Seed Minimal Workspace
 
 Application business logic is not implemented yet.
 
@@ -54,7 +54,19 @@ Current commands:
 
 STAGE 1.1 introduces the initial database schema foundation using PostgreSQL and Drizzle.
 
-No production database is configured yet. `.env.example` contains a placeholder `DATABASE_URL` for future local migration runs.
+No production database is configured yet. `.env.example` contains a placeholder `DATABASE_URL` for future local migration and seed runs.
+
+## Development seed
+
+STAGE 1.2 adds an explicit development seed command for synthetic local fixtures.
+
+The seed does not run automatically and requires `DATABASE_URL`.
+
+```powershell
+corepack pnpm db:seed
+```
+
+Seed data is synthetic and must not be used as production data.
 
 ## Documentation
 
