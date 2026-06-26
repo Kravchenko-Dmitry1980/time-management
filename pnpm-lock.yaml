@@ -39,6 +39,9 @@ importers:
 
   packages/db:
     dependencies:
+      '@time-management/core':
+        specifier: workspace:*
+        version: link:../core
       drizzle-orm:
         specifier: ^0.44.2
         version: 0.44.7(@types/pg@8.20.0)(pg@8.21.0)

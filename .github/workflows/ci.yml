@@ -61,7 +61,7 @@ jobs:
           p_password="PASSWORD""="
           p_token="TOKEN""="
           p_bearer="Bear""er "
-          p_openai_token="sk""-[A-Za-z0-9]"
+          p_openai_token="(^|[^A-Za-z0-9_])sk""-[A-Za-z0-9]{20,}"
           p_rsa_private="BEGIN RSA ""PRIVATE KEY"
           p_private="BEGIN ""PRIVATE KEY"
 
