@@ -50,6 +50,12 @@ Current commands:
 - `corepack pnpm test`
 - `corepack pnpm format`
 
+## Database
+
+STAGE 1.1 introduces the initial database schema foundation using PostgreSQL and Drizzle.
+
+No production database is configured yet. `.env.example` contains a placeholder `DATABASE_URL` for future local migration runs.
+
 ## Documentation
 
 Core contract documents are stored in `docs/`:
