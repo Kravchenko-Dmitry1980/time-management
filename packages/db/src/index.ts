@@ -1,1 +1,2 @@
-export const dbPackageName = '@time-management/db' as const;
+export * from './schema.js';
+export * from './client.js';

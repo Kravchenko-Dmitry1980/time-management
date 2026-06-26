@@ -91,14 +91,13 @@ jobs:
             "apps/worker/src/jobs"
             "packages/core/src/tasks"
             "packages/core/src/access"
-            "packages/db/src/schema"
             "packages/auth/src/session"
             "packages/ai/src/provider"
           )
 
           for path in "${forbidden_paths[@]}"; do
             if [ -e "$path" ]; then
-              echo "Forbidden Stage 0.4 path exists: $path"
+              echo "Forbidden Stage 1.1 path exists: $path"
               exit 1
             fi
           done
@@ -111,7 +110,7 @@ jobs:
 
           for file in "${forbidden_files[@]}"; do
             if [ -e "$file" ]; then
-              echo "Forbidden Stage 0.4 file exists: $file"
+              echo "Forbidden Stage 1.1 file exists: $file"
               exit 1
             fi
           done
@@ -119,27 +118,23 @@ jobs:
           if find . \
             -path './node_modules' -prune -o \
             -path './.git' -prune -o \
+            -path './packages/db/migrations' -prune -o \
             -name '*.sql' -print | grep -q .; then
-            echo "SQL files are forbidden at Stage 0.4."
+            echo "SQL files are forbidden outside packages/db/migrations at Stage 1.1."
             exit 1
           fi
 
           if find packages/core/src -maxdepth 1 -type f \( -name 'tasks*' -o -name 'access*' \) -print 2>/dev/null | grep -q .; then
-            echo "Premature core feature files are forbidden at Stage 0.4."
-            exit 1
-          fi
-
-          if find packages/db/src -maxdepth 1 -type f -name 'schema*' -print 2>/dev/null | grep -q .; then
-            echo "Premature DB schema files are forbidden at Stage 0.4."
+            echo "Premature core feature files are forbidden at Stage 1.1."
             exit 1
           fi
 
           if find packages/auth/src -maxdepth 1 -type f -name 'session*' -print 2>/dev/null | grep -q .; then
-            echo "Premature auth session files are forbidden at Stage 0.4."
+            echo "Premature auth session files are forbidden at Stage 1.1."
             exit 1
           fi
 
           if find packages/ai/src -maxdepth 1 -type f -name 'provider*' -print 2>/dev/null | grep -q .; then
-            echo "Premature AI provider files are forbidden at Stage 0.4."
+            echo "Premature AI provider files are forbidden at Stage 1.1."
             exit 1
           fi
