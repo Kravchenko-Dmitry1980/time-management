@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm';
 import {
   check,
+  boolean,
   date,
   index,
   jsonb,
@@ -107,6 +108,14 @@ export const taskEventTypeEnum = pgEnum('task_event_type', [
   'ai_classified',
   'ai_classification_corrected',
   'comment_added',
+]);
+
+export const authAuditEventTypeEnum = pgEnum('auth_audit_event_type', [
+  'login_success',
+  'login_failed',
+  'logout',
+  'session_validated',
+  'session_revoked',
 ]);
 
 export const users = pgTable(
@@ -516,5 +525,55 @@ export const taskEvents = pgTable(
       table.eventType,
       table.createdAt,
     ),
+  ],
+);
+
+export const authSessions = pgTable(
+  'auth_sessions',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id, { onDelete: 'cascade' }),
+    tokenHash: text('token_hash').notNull(),
+    userAgent: text('user_agent'),
+    ipAddress: text('ip_address'),
+    expiresAt: timestamptz('expires_at').notNull(),
+    revokedAt: timestamptz('revoked_at'),
+    lastUsedAt: timestamptz('last_used_at'),
+    createdAt: timestamptz('created_at').notNull().defaultNow(),
+    updatedAt: timestamptz('updated_at').notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex('auth_sessions_token_hash_unique_idx').on(table.tokenHash),
+    index('auth_sessions_user_id_idx').on(table.userId),
+    index('auth_sessions_expires_at_idx').on(table.expiresAt),
+    index('auth_sessions_revoked_at_idx').on(table.revokedAt),
+    index('auth_sessions_user_active_idx').on(table.userId, table.revokedAt, table.expiresAt),
+    check('auth_sessions_token_hash_not_empty_check', sql`length(trim(${table.tokenHash})) > 0`),
+  ],
+);
+
+export const authAuditEvents = pgTable(
+  'auth_audit_events',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    userId: uuid('user_id').references(() => users.id, { onDelete: 'set null' }),
+    emailNormalized: text('email_normalized'),
+    eventType: authAuditEventTypeEnum('event_type').notNull(),
+    success: boolean('success').notNull(),
+    reason: text('reason'),
+    ipAddress: text('ip_address'),
+    userAgent: text('user_agent'),
+    metadata: jsonb('metadata'),
+    retentionUntil: timestamptz('retention_until'),
+    createdAt: timestamptz('created_at').notNull().defaultNow(),
+  },
+  (table) => [
+    index('auth_audit_events_user_id_idx').on(table.userId),
+    index('auth_audit_events_email_normalized_idx').on(table.emailNormalized),
+    index('auth_audit_events_event_type_idx').on(table.eventType),
+    index('auth_audit_events_created_at_idx').on(table.createdAt),
+    index('auth_audit_events_retention_until_idx').on(table.retentionUntil),
   ],
 );

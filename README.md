@@ -4,9 +4,9 @@ Contract-first MVP for a self-hosted personal/family/work task management system
 
 ## Current stage
 
-STAGE 1.2 — Seed Minimal Workspace
+STAGE 2.1 - Auth Foundation
 
-Application business logic is not implemented yet.
+Framework-agnostic authentication foundation is implemented without HTTP routes, cookies, UI, or external auth providers.
 
 ## CI
 
@@ -67,6 +67,14 @@ corepack pnpm db:seed
 ```
 
 Seed data is synthetic and must not be used as production data.
+
+## Auth foundation
+
+STAGE 2.1 adds framework-agnostic authentication services and database-backed sessions.
+
+No HTTP auth routes, cookies, frontend login UI, OAuth, or external auth provider are implemented yet.
+
+No production auth run instructions or fake credentials are provided in this stage.
 
 ## Documentation
 

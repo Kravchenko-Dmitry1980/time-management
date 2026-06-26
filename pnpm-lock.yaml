@@ -39,6 +39,9 @@ importers:
 
   packages/db:
     dependencies:
+      '@time-management/auth':
+        specifier: workspace:*
+        version: link:../auth
       '@time-management/core':
         specifier: workspace:*
         version: link:../core
